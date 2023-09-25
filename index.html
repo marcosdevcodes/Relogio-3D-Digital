@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- https://favicon.io/favicon-generator/ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io (1)/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io (1)/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io (1)/favicon-16x16.png" />
+    <link rel="manifest" href="favicon_io (1)/site.webmanifest" />
+    <title>Relogio 3D</title>
+  </head>
+  <body>
+    <div class="clock">
+      <div class="digital" style="--clr: #ff2972">
+        <div class="screen" data-text="Hours">
+          <div class="time">
+            <div id="hours"></div>
+          </div>
+        </div>
+      </div>
+      <div class="digital" style="--clr: #fee800">
+        <div class="screen" data-text="Minutes">
+          <div class="time">
+            <div id="minutes"></div>
+          </div>
+        </div>
+      </div>
+      <div class="digital" style="--clr: #04fc43">
+        <div class="screen" data-text="Seconds">
+          <div class="time">
+            <div id="seconds"></div>
+          </div>
+        </div>
+      </div>
+      <div class="digital">
+        <div class="box" id="hr" style="--clr: #ff2972"></div>
+        <div class="box" id="mn" style="--clr: #fee800"></div>
+        <div class="box" id="sc" style="--clr: #04fc43"></div>
+        <div id="ampm"></div>
+      </div>
+    </div>
+
+    <script>
+      let hours = document.getElementById("hours");
+      let minite = document.getElementById("minutes");
+      let seconds = document.getElementById("seconds");
+      let ampm = document.getElementById("ampm");
+
+      let hr = document.querySelector("#hr");
+      let mn = document.querySelector("#mn");
+      let sc = document.querySelector("#sc");
+
+
+      setInterval(() => {
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
+
+        var am = h >= 12 ? "PM" : "AM";
+
+        //convert 24hrs clock to 12hours clock
+
+        if (h > 12) {
+          h = h - 12;
+        }
+
+        //add zero before single digit number
+        h = h < 10 ? "0" + h : h;
+        m = m < 10 ? "0" + m : m;
+        s = s < 10 ? "0" + s : s;
+
+        hours.innerHTML = h;
+        minite.innerHTML = m;
+        seconds.innerHTML = s;
+        ampm.innerHTML = am;
+        hr.style.transform = `rotateZ(${h * 30}deg)`;
+        mn.style.transform = `rotateZ(${m * 6}deg)`;
+        sc.style.transform = `rotateZ(${s * 6}deg)`;
+      });
+    </script>
+  </body>
+</html>
